@@ -23,7 +23,7 @@ var education = {
       "name": "TJNU",
       "location": "Tianjin",
       "degree": "bachelor",
-      "majors": "Chemistry",
+      "majors": ["Chemistry"],
       "dates": "2013",
       "url": "https://www.tjnu.edu.cn/"
     },
@@ -31,7 +31,7 @@ var education = {
       "name": "Gatech",
       "location": "ALT",
       "degree": "master",
-      "majors": "CSE",
+      "majors": ["CSE"],
       "dates": "2017",
       "url": "http://www.gatech.edu/"
     }
@@ -76,19 +76,19 @@ var projects = {
       "titles": "Mockup to Article",
       "dates": "2017-5-30",
       "description": "Practice HTML syntax by converting a mockup of a blog article into a real website!",
-      "images": "images/blog-mockup.jpg"
+      "images": ["images/blog-mockup.jpg"]
     },
     {
       "titles": "Animal Trading Cards",
       "dates": "2017-6-1",
       "description": "Use what I've learned about CSS to convert a design prototype into a functional webpage!",
-      "images": "images/pika.png"
+      "images": ["images/pika.png"]
     },
     {
       "titles": "Building a Portfolio Website",
       "dates": "2017-6-30",
       "description": "I am provided with a design mockup as a PDF-file and have replicated that design in HTML and CSS. I develop a responsive website that will display images, descriptions and links to each of the portfolio projects you complete.",
-      "images": "images/building-a-portfolio-website.jpg"
+      "images": ["images/building-a-portfolio-website.jpg"]
     }
   ]
 };
@@ -101,19 +101,19 @@ bio.display = function() {
   $("#header").append(formattedRole);
   // $("#header").append(HTMLcontactGeneric);
   var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-  $("#header").append(formattedMobile);
+  $("#header, #footerContacts").append(formattedMobile);
   var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-  $("#header").append(formattedEmail);
+  $("#header, #footerContacts").append(formattedEmail);
   var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-  $("#header").append(formattedTwitter);
+  $("#header, #footerContacts").append(formattedTwitter);
   var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-  $("#header").append(formattedGithub);
+  $("#header, #footerContacts").append(formattedGithub);
   var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
-  $("#header").append(formattedBlog);
+  $("#header, #footerContacts").append(formattedBlog);
   var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-  $("#header").append(formattedLocation);
+  $("#header, #footerContacts").append(formattedLocation);
   var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-  $("#header").append(formattedBioPic);
+  $("#header, #footerContacts").append(formattedBioPic);
   var formattedWelcomMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
   $("#header").append(formattedWelcomMsg);
   if (bio.skills.length > 0) {
@@ -146,8 +146,11 @@ projects.display = function dispalyProjects() {
     var formattedTitle = HTMLprojectTitle.replace("%data%", project.titles);
     var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
     var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
-    var formattedImages = HTMLprojectImage.replace("%data%", project.images);
-    $(".project-entry:last").append(formattedTitle).append(formattedDates).append(formattedDescription).append(formattedImages);
+    $(".project-entry:last").append(formattedTitle).append(formattedDates).append(formattedDescription);
+    project.images.forEach(function(image) {
+      var formattedImages = HTMLprojectImage.replace("%data%", project.images);
+      $(".project-entry:last").append(formattedImages);
+    });
   });
 };
 projects.display();
@@ -180,3 +183,6 @@ education.display = function displayEducation() {
   });
 };
 education.display();
+
+// append the a map
+$("#mapDiv").append(googleMap);
