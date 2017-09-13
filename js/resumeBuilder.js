@@ -31,7 +31,7 @@ var education = {
       "name": "Gatech",
       "location": "ALT",
       "degree": "master",
-      "majors": ["CSE"],
+      "majors": ["Bioinformatics"],
       "dates": "2017",
       "url": "http://www.gatech.edu/"
     }
